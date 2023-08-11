@@ -4,35 +4,35 @@ import tabuleiro.Posicao;
 
 public class PosicaoXadrez {
 	
-	private char coluna;
-	private int linha;
+	private int coluna;
+	private char linha;
 	
-	public PosicaoXadrez(char coluna, int linha) {
-		if (coluna < 'A' || coluna > 'H' || linha < 1 || linha > 8) {
+	public PosicaoXadrez(char linha, int coluna) {
+		if (linha < 'A' || linha > 'H' || coluna < 1 || coluna > 8) {
 			throw new XadrezException("Erro ao instanciar posição. Valores válidos são de A1 até H8.");
 		}
 		this.coluna = coluna;
 		this.linha = linha;
 	}
 	
-	public char getColuna() {
+	public int getColuna() {
 		return coluna;
 	}
 
-	public int getLinha() {
+	public char getLinha() {
 		return linha;
 	}
 	
 	protected Posicao toPosicao() {
-		return new Posicao(8 - linha, coluna - 'A'); 
+		return new Posicao('H' - linha, coluna - 1);
 	}
 	
 	protected static PosicaoXadrez fromPosicao(Posicao posicao) {
-		return new PosicaoXadrez((char)('A' - posicao.getColuna()), 8 - posicao.getLinha());
+		return new PosicaoXadrez((char)('H' - posicao.getLinha()), posicao.getColuna() - 1);
 	}
 	
 	@Override
 	public String toString() {
-		return "" + coluna + linha;
+		return "" + linha + coluna;
 	}
 }

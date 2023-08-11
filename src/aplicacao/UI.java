@@ -28,12 +28,18 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
-	public static PosicaoXadrez lerPosicaoXadrez(Scanner sc) {
+	public static PosicaoXadrez[] lerPosicaoXadrez(Scanner sc) {
 		try {
 			String s = sc.nextLine();
-			char coluna = s.charAt(0);
-			int linha = Integer.parseInt(s.substring(1));
-			return new PosicaoXadrez(coluna, linha);
+			PosicaoXadrez posicoes[] = new PosicaoXadrez[2];
+			int i = 0;
+			for(String pos : s.split(" ")) {
+				char linha = pos.charAt(0);
+				int coluna = Integer.parseInt(pos.substring(1));
+				posicoes[i] = new PosicaoXadrez(linha, coluna);
+				i++;
+			}
+			return posicoes;
 		} catch (RuntimeException e) {
 			throw new InputMismatchException("Erro ao ler posição de xadrez. Valores válidos de A1 até H8.");
 		}
@@ -41,13 +47,13 @@ public class UI {
 
 	public static void exibirTabuleiro(PecaXadrez[][] pecas) {
 		for (int i = 0; i < pecas.length; i++) {
-			System.out.print((8 - i) + " ");
+			System.out.print((char)('H' - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
 				exibirPeca(pecas[i][j]);
 			}
 			System.out.println();
 		}
-		System.out.println("  A B C D E F G H");
+		System.out.println("  1 2 3 4 5 6 7 8");
 	}
 
 	private static void exibirPeca(PecaXadrez peca) {
@@ -55,9 +61,9 @@ public class UI {
 			System.out.print("-");
 		} else {
 			if (peca.getCor() == Cor.BRANCO) {
-				System.out.print(ANSI_WHITE + peca + ANSI_RESET);
+				System.out.print(ANSI_RED + peca + ANSI_RESET);
 			} else {
-				System.out.print(ANSI_YELLOW + peca + ANSI_RESET);
+				System.out.print(ANSI_BLUE + peca + ANSI_RESET);
 			}
 		}
 		System.out.print(" ");

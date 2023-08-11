@@ -17,14 +17,11 @@ public class Programa {
 			UI.exibirTabuleiro(partida.getPecas());
 			
 			System.out.println();
-			System.out.print("Origem: ");
-			PosicaoXadrez origem = UI.lerPosicaoXadrez(sc);
+			System.out.print("Jogada(O D): ");
+			PosicaoXadrez jogada[] = UI.lerPosicaoXadrez(sc);
 			
+			PecaXadrez pecaCapturada = partida.executarJogada(jogada[0], jogada[1]);
 			System.out.println();
-			System.out.print("Destino: ");
-			PosicaoXadrez destino = UI.lerPosicaoXadrez(sc);
-			
-			PecaXadrez pecaCapturada = partida.executarJogada(origem, destino);
 		}
 		
 	}
