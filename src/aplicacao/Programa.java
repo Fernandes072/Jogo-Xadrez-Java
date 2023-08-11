@@ -34,7 +34,10 @@ public class Programa {
 				System.out.println(e.getMessage());
 				System.out.print("Pressione Enter para continuar!");
 				sc.nextLine();
+			} finally {
+				System.out.println();
 			}
+			
 		}
 		
 	}
