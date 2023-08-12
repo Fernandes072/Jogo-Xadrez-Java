@@ -18,7 +18,7 @@ public class Programa {
 		while (true) {
 			try {
 			UI.limparTela();
-			UI.exibirTabuleiro(partida.getPecas());
+			UI.exibirPartida(partida);
 			
 			System.out.println();
 			System.out.print("Origem: ");
