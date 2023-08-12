@@ -34,18 +34,12 @@ public class UI {
 		System.out.flush();
 	}
 
-	public static PosicaoXadrez[] lerPosicaoXadrez(Scanner sc) {
+	public static PosicaoXadrez lerPosicaoXadrez(Scanner sc) {
 		try {
 			String s = sc.nextLine();
-			PosicaoXadrez posicoes[] = new PosicaoXadrez[2];
-			int i = 0;
-			for(String pos : s.split(" ")) {
-				char linha = pos.charAt(0);
-				int coluna = Integer.parseInt(pos.substring(1));
-				posicoes[i] = new PosicaoXadrez(linha, coluna);
-				i++;
-			}
-			return posicoes;
+			char coluna = s.charAt(0);
+			int linha = Integer.parseInt(s.substring(1));
+			return new PosicaoXadrez(coluna, linha);
 		} catch (RuntimeException e) {
 			throw new InputMismatchException("Erro ao ler posição de xadrez. Valores válidos de A1 até H8.");
 		}
@@ -55,16 +49,30 @@ public class UI {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((char)('H' - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
-				exibirPeca(pecas[i][j]);
+				exibirPeca(pecas[i][j], false);
+			}
+			System.out.println();
+		}
+		System.out.println("  1 2 3 4 5 6 7 8");
+	}
+	
+	public static void exibirTabuleiro(PecaXadrez[][] pecas, boolean[][] movimentosPossiveis) {
+		for (int i = 0; i < pecas.length; i++) {
+			System.out.print((char)('H' - i) + " ");
+			for (int j = 0; j < pecas.length; j++) {
+				exibirPeca(pecas[i][j], movimentosPossiveis[i][j]);
 			}
 			System.out.println();
 		}
 		System.out.println("  1 2 3 4 5 6 7 8");
 	}
 
-	private static void exibirPeca(PecaXadrez peca) {
+	private static void exibirPeca(PecaXadrez peca, boolean fundo) {
+		if (fundo) {
+			System.out.print(ANSI_YELLOW_BACKGROUND);
+		}
 		if (peca == null) {
-			System.out.print("-");
+			System.out.print("-" + ANSI_RESET);
 		} else {
 			if (peca.getCor() == Cor.BRANCO) {
 				System.out.print(ANSI_RED + peca + ANSI_RESET);

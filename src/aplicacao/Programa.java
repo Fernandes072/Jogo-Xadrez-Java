@@ -21,11 +21,17 @@ public class Programa {
 			UI.exibirTabuleiro(partida.getPecas());
 			
 			System.out.println();
-			System.out.print("Jogada(O D): ");
-			PosicaoXadrez jogada[] = UI.lerPosicaoXadrez(sc);
+			System.out.print("Origem: ");
+			PosicaoXadrez origem = UI.lerPosicaoXadrez(sc);
+			boolean[][] movimentosPossiveis = partida.movimentosPossiveis(origem);
+			UI.limparTela();
+			UI.exibirTabuleiro(partida.getPecas(), movimentosPossiveis);
 			
-			PecaXadrez pecaCapturada = partida.executarJogada(jogada[0], jogada[1]);
 			System.out.println();
+			System.out.print("Destino: ");
+			PosicaoXadrez destino = UI.lerPosicaoXadrez(sc);
+
+			PecaXadrez pecaCapturada = partida.executarJogada(origem, destino);
 			} catch (XadrezException e) {
 				System.out.println(e.getMessage());
 				System.out.print("Pressione Enter para continuar!");
