@@ -109,7 +109,7 @@ public class UI {
 		List<PecaXadrez> vermelho = capturadas.stream().filter(x -> x.getCor() == Cor.VERMELHO)
 				.collect(Collectors.toList());
 		List<PecaXadrez> azul = capturadas.stream().filter(x -> x.getCor() == Cor.AZUL).collect(Collectors.toList());
-		System.out.println("Peças capturatas: ");
+		System.out.println("Peças capturadas: ");
 		System.out.print("Vermelho: ");
 		System.out.print(ANSI_RED);
 		System.out.println(Arrays.toString(vermelho.toArray()));
